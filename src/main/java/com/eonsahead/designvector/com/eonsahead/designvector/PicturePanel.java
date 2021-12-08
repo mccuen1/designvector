@@ -11,33 +11,26 @@ import javax.swing.JPanel;
 
 public class PicturePanel extends JPanel {
     // TO-DO: Try a different background color.
-    private static final Color BG_COLOR = new Color(180, 248, 224);
+    private static final Color BG_COLOR = new Color(160, 90, 190);
     // TO-DO: Try assigning other values to STEPS.
-    private static final int STEPS = 5;
+    private static final int STEPS = 200;
 
     public PicturePanel() {
         this.setBackground(BG_COLOR);
     } // PicturePanel()
 
     private final double radius(double angle) {
-        // TO-DO: Try making the radius a different
-        // function of the angle.
         return 0.5;
     } // radius( double )
 
-    // TO-DO: Try making x() and y() different
-    // functions of radius and angle.
-    // TO-DO: Might it be useful to add an integer
-    // parameter to these methods? This parameter's
-    // value could be a measure of which step in the
-    // drawing of the figure we are executing.
-    private final double x( double radius, double angle ) {
-        return radius * Math.cos( angle );
+    private final double x( double radius, double a, double b, double angle ) {
+        return (a+b)*Math.cos(angle) - radius*Math.cos(((a/b)+1)*angle);
     } // x( double, double )
     
-    private final double y( double radius, double angle ) {
-        return radius * Math.sin( angle );
+    private final double y( double radius, double a, double b, double angle ) {
+        return (a+b)*Math.sin(angle) - radius*Math.sin(((a/b)+1)*angle);
     } // y( double, double )
+
     
     @Override
     public void paintComponent(Graphics g) {
@@ -48,14 +41,17 @@ public class PicturePanel extends JPanel {
         int h = this.getHeight();
 
         List<Vector2D> points = new ArrayList<>();
-        double radius = 0.5;
+        double radius = 0.7;
+        double a = -2.5;
+        double b = 1.5;
         for (int i = 0; i < STEPS; i++) {
-            double angle = ((double) i) / STEPS * 2.0 * Math.PI;
+            // had to change this to get it to show all parts, from zero to 8 pi
+            double angle = ((double) i) / STEPS * 8.0 * Math.PI;
             
             // Convert polar coordinates (radius, angle)
             // to Cartesian coordinates (x, y).
-            double x = x( radius, angle );
-            double y = y( radius, angle );
+            double x = x( radius, a, b, angle );
+            double y = y( radius, a, b, angle );
             points.add(new Vector2D(x, y));
         } // for
 
@@ -82,10 +78,10 @@ public class PicturePanel extends JPanel {
             y = p.getY();
             path.lineTo(x, y);
         } // for
-        path.closePath();
+        //path.closePath();
 
         // TO-DO: Try drawing with a different color.
-        g2D.setColor(Color.BLUE);
+        g2D.setColor(Color.black);
         // TO-DO: Try changing the thickness of the line/curve.
         g2D.setStroke(new BasicStroke(4));
         // TO-DO: For some kinds of geometry, you might want

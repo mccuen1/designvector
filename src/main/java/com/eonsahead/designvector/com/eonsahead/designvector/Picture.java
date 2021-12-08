@@ -6,8 +6,8 @@ import javax.swing.JFrame;
 
 
 public class Picture extends JFrame {
-    private static final int FRAME_WIDTH = 512;
-    private static final int FRAME_HEIGHT = 512;
+    private static final int FRAME_WIDTH = 800;
+    private static final int FRAME_HEIGHT = 800;
     private static final String FRAME_TITLE = "Picture";
     
     public Picture() {

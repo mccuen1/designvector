@@ -27,21 +27,6 @@ package com.eonsahead.designvector;
  */
 public class Vector2D {
 
-    // We might think of more than one
-    // way to organize the data in our class.
-    // "Information hiding" and "encapsulation"
-    // mean that the programmers who use our
-    // class do not need to know which of the
-    // alternatives we chose.
-    // We could define 3 separate instance variables.
-//    private double x;
-//    private double y;
-//    private double h;
-    // Or we could define a single instance variable
-    // that is an array.
-    // (Because we have chosen not to define any
-    // setters, we could make this instance variable
-    // final.)
     private final double[] components = new double[3];
 
     public Vector2D() {
@@ -102,13 +87,7 @@ public class Vector2D {
     // (All classes inherit from the Object class.)
     @Override
     public String toString() {
-        // Java's String class provides a method for
-        // formatting strings.
-        // %8.4f is a formatting code.
-        // It means a floating point value
-        // represented with 8 digits in total,
-        // including 4 digits to the right of
-        // the decimal point.
+
         return String.format("(%8.4f,%8.4f)", this.getX(), this.getY());
     } // toString()
 
